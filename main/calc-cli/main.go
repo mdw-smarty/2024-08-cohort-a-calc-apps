@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	handler := handlers.NewHandler(calc.Addition{}, os.Stdout)
+	handler := handlers.NewCLIHandler(calc.Addition{}, os.Stdout)
 	err := handler.Handle(os.Args[1:])
 	if err != nil {
 		panic(err)

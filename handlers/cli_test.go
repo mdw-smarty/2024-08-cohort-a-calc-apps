@@ -26,21 +26,21 @@ func assertError(t *testing.T, expected, actual error) {
 
 func TestTooFewArguments(t *testing.T) {
 	output := bytes.Buffer{}
-	handler := NewHandler(calc.Addition{}, &output)
+	handler := NewCLIHandler(calc.Addition{}, &output)
 	err := handler.Handle(nil)
 	assertError(t, errTooFewArgs, err)
 	assertEqual(t, "", output.String())
 }
 func TestInvalidFirstArg(t *testing.T) {
 	output := bytes.Buffer{}
-	handler := NewHandler(calc.Addition{}, &output)
+	handler := NewCLIHandler(calc.Addition{}, &output)
 	err := handler.Handle([]string{"NaN", "1"})
 	assertError(t, errMalformedArgument, err)
 	assertEqual(t, "", output.String())
 }
 func TestInvalidSecondArg(t *testing.T) {
 	output := bytes.Buffer{}
-	handler := NewHandler(calc.Addition{}, &output)
+	handler := NewCLIHandler(calc.Addition{}, &output)
 	err := handler.Handle([]string{"1", "NaN"})
 	assertError(t, errMalformedArgument, err)
 	assertEqual(t, "", output.String())
@@ -48,14 +48,14 @@ func TestInvalidSecondArg(t *testing.T) {
 func TestOutputWriterError(t *testing.T) {
 	taco := errors.New("taco")
 	output := &ErringWriter{err: taco}
-	handler := NewHandler(calc.Addition{}, output)
+	handler := NewCLIHandler(calc.Addition{}, output)
 	err := handler.Handle([]string{"1", "2"})
 	assertError(t, errOutputWriteErr, err)
 	assertError(t, taco, err)
 }
 func TestHappyPath(t *testing.T) {
 	output := bytes.Buffer{}
-	handler := NewHandler(calc.Addition{}, &output)
+	handler := NewCLIHandler(calc.Addition{}, &output)
 	err := handler.Handle([]string{"1", "2"})
 	assertEqual(t, nil, err)
 	assertEqual(t, "3\n", output.String())

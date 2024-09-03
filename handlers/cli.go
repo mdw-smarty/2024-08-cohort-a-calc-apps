@@ -9,16 +9,16 @@ import (
 
 type Calculator interface{ Calculate(a, b int) int }
 
-type Handler struct {
+type CLIHandler struct {
 	calculator Calculator
 	output     io.Writer
 }
 
-func NewHandler(calculator Calculator, output io.Writer) *Handler {
-	return &Handler{calculator: calculator, output: output}
+func NewCLIHandler(calculator Calculator, output io.Writer) *CLIHandler {
+	return &CLIHandler{calculator: calculator, output: output}
 }
 
-func (this *Handler) Handle(args []string) error {
+func (this *CLIHandler) Handle(args []string) error {
 	if len(args) != 2 {
 		return fmt.Errorf("%w: two args required (you provided %d)", errTooFewArgs, len(args))
 	}
