@@ -19,6 +19,9 @@ func NewCLIHandler(calculator Calculator, output io.Writer) *CLIHandler {
 }
 
 func (this *CLIHandler) Handle(args []string) error {
+	if this.calculator == nil {
+		return errNilCalculator
+	}
 	if len(args) != 2 {
 		return fmt.Errorf("%w: two args required (you provided %d)", errTooFewArgs, len(args))
 	}
@@ -42,4 +45,5 @@ var (
 	errTooFewArgs        = errors.New("usage: calc <a> <b>")
 	errMalformedArgument = errors.New("invalid argument")
 	errOutputWriteErr    = errors.New("output writer err")
+	errNilCalculator     = errors.New("calculator required")
 )

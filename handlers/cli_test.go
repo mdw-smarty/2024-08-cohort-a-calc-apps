@@ -31,6 +31,11 @@ func TestTooFewArguments(t *testing.T) {
 	assertError(t, errTooFewArgs, err)
 	assertEqual(t, "", output.String())
 }
+func TestNilCalculator(t *testing.T) {
+	handler := NewCLIHandler(nil, nil)
+	err := handler.Handle(nil)
+	assertError(t, errNilCalculator, err)
+}
 func TestInvalidFirstArg(t *testing.T) {
 	output := bytes.Buffer{}
 	handler := NewCLIHandler(calc.Addition{}, &output)
