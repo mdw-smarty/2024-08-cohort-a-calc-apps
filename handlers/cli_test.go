@@ -61,7 +61,9 @@ func TestOutputWriterError(t *testing.T) {
 func TestHappyPath(t *testing.T) {
 	output := bytes.Buffer{}
 	handler := NewCLIHandler(calc.Addition{}, &output)
+
 	err := handler.Handle([]string{"1", "2"})
+
 	assertEqual(t, nil, err)
 	assertEqual(t, "3\n", output.String())
 }
