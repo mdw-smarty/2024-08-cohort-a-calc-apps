@@ -24,11 +24,10 @@ func Test404(t *testing.T) {
 	assertResponse(t, ServeRequest("/asdf"),
 		http.StatusNotFound, "text/plain; charset=utf-8", "404 page not found")
 }
-func TestAParameterMalformed(t *testing.T) {
+func TestParametersMalformed(t *testing.T) {
 	assertResponse(t, ServeRequest("/add?a=NaN&b=3"),
 		http.StatusUnprocessableEntity, "text/plain; charset=utf-8", "invalid parameter: 'a'")
-}
-func TestBParameterMalformed(t *testing.T) {
+
 	assertResponse(t, ServeRequest("/add?a=2&b=NaN"),
 		http.StatusUnprocessableEntity, "text/plain; charset=utf-8", "invalid parameter: 'b'")
 }
