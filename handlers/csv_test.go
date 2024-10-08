@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/mdwhatcott/calc-lib/calc"
+	"github.com/smarty/assertions/should"
 )
 
 const input = `1,+,2
@@ -29,8 +30,8 @@ func TestCSVHappyPath(t *testing.T) {
 
 	err := NewCSVHandler(strings.NewReader(input), &output, calculators).Handle()
 
-	assertError(t, nil, err)
-	assertEqual(t, expectedOutput, output.String())
+	should.So(t, err, should.BeNil)
+	should.So(t, output.String(), should.Equal, expectedOutput)
 }
 
 func TestCSVReadError(t *testing.T) {
@@ -41,8 +42,8 @@ func TestCSVReadError(t *testing.T) {
 
 	err := NewCSVHandler(input, &output, calculators).Handle()
 
-	assertError(t, boink, err)
-	assertEqual(t, "", output.String())
+	should.So(t, err, should.Wrap, boink)
+	should.So(t, output.String(), should.Equal, "")
 }
 
 func TestCSVWriteError(t *testing.T) {

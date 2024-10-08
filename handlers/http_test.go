@@ -5,6 +5,8 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"github.com/smarty/assertions/should"
 )
 
 func ServeRequest(path string) *httptest.ResponseRecorder {
@@ -15,9 +17,9 @@ func ServeRequest(path string) *httptest.ResponseRecorder {
 }
 func assertResponse(t *testing.T, actual *httptest.ResponseRecorder, code int, contentType, body string) {
 	t.Helper()
-	assertEqual(t, contentType, actual.Header().Get("Content-Type"))
-	assertEqual(t, code, actual.Code)
-	assertEqual(t, body, strings.TrimSpace(actual.Body.String()))
+	should.So(t, actual.Header().Get("Content-Type"), should.Equal, contentType)
+	should.So(t, actual.Code, should.Equal, code)
+	should.So(t, strings.TrimSpace(actual.Body.String()), should.Equal, body)
 }
 
 func Test404(t *testing.T) {

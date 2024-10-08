@@ -1,2 +1,4 @@
 github.com/mdwhatcott/calc-lib v0.1.0 h1:nPIDPQahHp6p3ulz8mAe1WKkS2YtRfHBhTky71wZh3M=
 github.com/mdwhatcott/calc-lib v0.1.0/go.mod h1:GPHRgtUjYaN/0A9BR8po1V/EvCmV0APQv5TEDaqyvuQ=
+github.com/smarty/assertions v1.16.0 h1:EvHNkdRA4QHMrn75NZSoUQ/mAUXAYWfatfB01yTCzfY=
+github.com/smarty/assertions v1.16.0/go.mod h1:duaaFdCS0K9dnoM50iyek/eYINOZ64gbh1Xlf6LG7AI=
