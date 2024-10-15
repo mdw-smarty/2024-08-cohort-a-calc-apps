@@ -51,7 +51,7 @@ func TestCSVWriteError(t *testing.T) {
 	boink := errors.New("boink")
 	output.err = boink
 	err := NewCSVHandler(strings.NewReader(input), &output, calculators).Handle()
-	assertError(t, boink, err)
+	should.So(t, err, should.Wrap, boink)
 }
 
 type ErringReader struct {
